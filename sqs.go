@@ -74,7 +74,7 @@ type ChangeMessageVisibilityResponse struct {
 
 // See http://goo.gl/XTo0s for more details 
 type ResponseMetadata struct {
-	RequestId string  `xml:"ResponseMetadata>RequestId"`
+	RequestId string `xml:"ResponseMetadata>RequestId"`
 }
 
 // Error represents an error in an operation with SQS
@@ -513,15 +513,18 @@ func (s *SQS) GetQueueUrlOfOwner(queueName, queueOwnerAWSAccountId string) (resp
 func (s *SQS) query(queueUrl string, params map[string]string, resp interface{}) error {
 	params["Version"] = "2011-10-01"
 	params["Timestamp"] = time.Now().In(time.UTC).Format(time.RFC3339)
-	endpoint, err := url.Parse(s.Region.SQSEndpoint)
-	if err != nil {
-		return err
-	}
+	var endpoint *url.URL
 	var path string
+	var err error
 	if queueUrl != "" {
+		endpoint, err = url.Parse(queueUrl)
 		path = queueUrl[len(s.Region.SQSEndpoint):]
 	} else {
+		endpoint, err = url.Parse(s.Region.SQSEndpoint)
 		path = "/"
+	}
+	if err != nil {
+		return err
 	}
 
 	sign(s.Auth, "GET", path, params, endpoint.Host)
