@@ -220,8 +220,8 @@ func (s *SQS) CreateQueue(name string, attributes []Attribute) (queue *Queue, er
 	queue = nil
 
 	for i, attribute := range attributes {
-		params["Attribute."+strconv.Itoa(i+1)+".Name"] = attribute.Name
-		params["Attribute."+strconv.Itoa(i+1)+".Value"] = attribute.Value
+		params["AttributeName."+strconv.Itoa(i+1)+".Name"] = attribute.Name
+		params["AttributeName."+strconv.Itoa(i+1)+".Value"] = attribute.Value
 	}
 
 	params["QueueName"] = name
@@ -270,7 +270,7 @@ func (q *Queue) GetQueueAttributes(attributes []string) (resp *GetQueueAttribute
 	params := makeParams("GetQueueAttributes")
 
 	for i, attribute := range attributes {
-		params["Attribute."+strconv.Itoa(i+1)] = attribute
+		params["AttributeName."+strconv.Itoa(i+1)] = attribute
 	}
 
 	err = q.SQS.query(q.Url, params, resp)
@@ -316,7 +316,7 @@ func (q *Queue) ReceiveMessage(attributes []string, maxNumberOfMessages int, vis
 	params := makeParams("ReceiveMessage")
 
 	for i, attribute := range attributes {
-		params["Attribute."+strconv.Itoa(i+1)] = attribute
+		params["AttributeName."+strconv.Itoa(i+1)] = attribute
 	}
 
 	params["MaxNumberOfMessages"] = strconv.Itoa(maxNumberOfMessages)
