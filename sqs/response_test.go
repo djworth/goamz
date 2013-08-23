@@ -3,7 +3,7 @@ package sqs_test
 var TestCreateQueueXmlOK = `
 <CreateQueueResponse>
   <CreateQueueResult>
-    <QueueUrl>http://sqs.us-east-1.amazonaws.com/123456789012/testQueue</QueueUrl>
+    <QueueUrl>http://localhost:4444/123456789012/testQueue</QueueUrl>
   </CreateQueueResult>
   <ResponseMetadata>
     <RequestId>7a62c49f-347e-4fc4-9331-6e8e7a96aa73</RequestId>
@@ -14,7 +14,7 @@ var TestCreateQueueXmlOK = `
 var TestListQueuesXmlOK = `
 <ListQueuesResponse>
   <ListQueuesResult>
-    <QueueUrl>http://sqs.us-east-1.amazonaws.com/123456789012/testQueue</QueueUrl>
+    <QueueUrl>http://localhost:4444/123456789012/testQueue</QueueUrl>
   </ListQueuesResult>
   <ResponseMetadata>
     <RequestId>725275ae-0b9b-4762-b238-436d7c65a1ac</RequestId>
@@ -25,7 +25,7 @@ var TestListQueuesXmlOK = `
 var TestGetQueueUrlXmlOK = `
 <GetQueueUrlResponse>
  <GetQueueUrlResult>
-   <QueueUrl>http://sqs.us-east-1.amazonaws.com/123456789012/testQueue</QueueUrl>
+   <QueueUrl>http://localhost:4444/123456789012/testQueue</QueueUrl>
  </GetQueueUrlResult>
  <ResponseMetadata>
    <RequestId>470a6f13-2ed9-4181-ad8a-2fdea142988e</RequestId>
@@ -68,7 +68,7 @@ var TestReceiveMessageXmlOK = `
       <Attribute>
         <Name>SenderId</Name>
         <Value>195004372649</Value>
-      </Attribute>                                                                                                                   
+      </Attribute>
       <Attribute>
         <Name>SentTimestamp</Name>
         <Value>1238099229000</Value>
